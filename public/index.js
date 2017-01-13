@@ -190,7 +190,17 @@ function exercice1(rental){
   var price = time + distance;
   console.log(price);
   rental.price = price;
+
+  var commission = 0.7 * price;
+  var insurance_commission = 0.5 * commission;
+  var roadside_assistance = 1 * numberday;
+  var drivy = commission - insurance_commission - roadside_assistance;
+
+  rental.commission.insurance = insurance_commission;
+  rental.commission.assistance = roadside_assistance;
+  rental.commission.drivy = drivy;
 }
+
 
 function numberofday(pickupDate,returnDate){
   var date1 = new Date(pickupDate);
