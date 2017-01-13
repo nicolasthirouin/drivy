@@ -164,7 +164,73 @@ var rentalModifications = [{
   'rentalId': '3-sa-92',
   'pickupDate': '2015-12-05'
 }];
+function exercice1(rental){
+  var carid = rental.carId;
+  var i;
+  var pricePerKm;
+  var pricePerDay;
+  for(i =0; i < cars.length; i++){
+    if(cars[i].id == carid){
+    pricePerKm = cars[i].pricePerKm;
+    console.log("Price per kms =  " + pricePerKm);
+    pricePerDay = cars[i].pricePerDay;
+    console.log("Price per day =  " + pricePerDay);
+    }
+  }
+  var pickupDate = rental.pickupDate;
+  var returnDate = rental.returnDate;
 
+  var numberday = numberofday(pickupDate,returnDate);
+  var reduce = pricereduce(numberday);
+  pricePerDay = pricePerDay * reduce;
+  var kms = rental.distance;
+  var time = calcultime(numberday, pricePerDay);
+  var distance = calculdistance(kms,pricePerKm);
+
+  var price = time + distance;
+  console.log(price);
+  rental.price = price;
+}
+
+function numberofday(pickupDate,returnDate){
+  var date1 = new Date(pickupDate);
+  var date2 = new Date(returnDate);
+  var result = (date2 - date1)/(1000*60*60*24);
+  result +=1;
+  console.log('nbre de jour : ' + result);
+  return result; // We increment + 1 if the person rent a car for 1 day for example.
+}
+function pricereduce(days){
+  var reduce = 1;
+  if(days > 1 && days <= 4){
+    reduce = 1 - 0.1;
+  }
+  else if(days > 4 && days <= 10){
+    reduce = 1 - 0.3;
+  }
+  else if(days > 10){
+    reduce = 1 - 0.5;
+  }
+  return reduce;
+}
+
+function calcultime(days, price){
+ var time = days * price;
+ console.log("price time = " + time);
+ return time;
+}
+
+function calculdistance(kms, price){
+ var distance = kms * price;
+ console.log("price distance = " + distance);
+ return distance;
+}
+
+//All console command.
+var i;
+for(i=0; i < rentals.length; i++){
+  console.log(exercice1(rentals[i]));
+}
 console.log(cars);
 console.log(rentals);
 console.log(actors);
