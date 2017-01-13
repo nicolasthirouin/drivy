@@ -199,8 +199,16 @@ function exercice1(rental){
   rental.commission.insurance = insurance_commission;
   rental.commission.assistance = roadside_assistance;
   rental.commission.drivy = drivy;
-}
 
+  var reductible = rental.options.deductibleReduction;
+  var option = 0;
+  if(reductible){
+    option = 4 * numberday;
+    price += option;
+    rental.price = price;
+    rental.commission.drivy += option;
+  }
+}
 
 function numberofday(pickupDate,returnDate){
   var date1 = new Date(pickupDate);
