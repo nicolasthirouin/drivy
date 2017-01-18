@@ -210,6 +210,22 @@ function exercice1(rental){
   }
 }
 
+function pay_actor(rentals){
+var id = rentals.id;
+var i;
+for(i = 0; i < actors.length ;i++){
+  if(id == actors[i].rentalId){
+   actors[i].payment[0].amount = rentals.price;
+   actors[i].payment[1].amount = rentals.price * 0.7;
+   //or we can initialize variables which calculate automatically the commission,
+   // and after write   actors[i].payment[1].amount = commission;
+   actors[i].payment[2].amount = rentals.commission.insurance;
+   actors[i].payment[3].amount = rentals.commission.assistance;
+   actors[i].payment[4].amount = rentals.commission.drivy;
+    }
+  }
+}
+
 function numberofday(pickupDate,returnDate){
   var date1 = new Date(pickupDate);
   var date2 = new Date(returnDate);
